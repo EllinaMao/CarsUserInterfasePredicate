@@ -14,4 +14,5 @@ public:
     void handleShowAllCars();
     void handleSortCars();
     void handleSearchCars() const;
+    void printSearchResults(const std::vector<Car>& results) const;
 };
