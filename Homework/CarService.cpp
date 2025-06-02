@@ -11,14 +11,15 @@ void CarService::sortCars(function<bool(const Car&, const Car&)> comparator) {
 
 vector<Car> CarService::searchCars(function<bool(const Car&)> predicate) const {
     vector<Car> result;
-    for (const auto& car : repository.getAllCars()) {
-        if (predicate(car)) {
-            result.push_back(car);
+    const auto& cars = repository.getAllCars();
+    for (auto it = cars.begin(); it != cars.end(); ++it) {
+        if (predicate(*it)) {
+            result.push_back(*it);
         }
     }
     return result;
 }
-
 const vector<Car>& CarService::getAllCars() const {
     return repository.getAllCars();
 }
+

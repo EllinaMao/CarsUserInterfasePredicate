@@ -13,9 +13,9 @@ public:
 	explicit UserInput(CarService& service) : service(service) {}
 
 	static double inputDouble();
-	static int inputInt();
+	static size_t inputSize_t();
 	static std::string inputString();
 
 	void inputCarDetails();
-
+	
 };
