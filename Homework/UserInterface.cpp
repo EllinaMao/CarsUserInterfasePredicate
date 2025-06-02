@@ -12,29 +12,36 @@ void UserInterface::run()
 {
     int choice = 0;
     do {
+        system("clear || cls");
         Menu::displayMainMenu();
         choice = Menu::option();
+        system("clear || cls");
         switch (choice) {
         case 1: {
             handleAddCar();
+            system("pause");
             break;
         }
         case 2: {
             cout << "Enter the index of the car to remove: " << endl;
             size_t index = UserInput::inputSize_t();
             handleRemoveCar(index);
+            system("pause");
             break;
         }
         case 3: {
             handleShowAllCars();
+			system("pause");
             break;
         }
         case 4: {
             handleSortCars();
+			system("pause");
             break;
         }
         case 5: {
             handleSearchCars();
+			system("pause");
             break;
         }
         case 0:
@@ -80,6 +87,7 @@ void UserInterface::handleShowAllCars()
 
 void UserInterface::handleSortCars()
 {
+    system("clear || cls");
     cout << "Sort by:" << endl;
     Menu::displayCarsMenu();
     int opt;
@@ -111,50 +119,57 @@ void UserInterface::handleSortCars()
 
 void UserInterface::handleSearchCars() const
 {
+    system("clear || cls");
     cout << "Search by:" << endl;
     Menu::displayCarsMenu();
-    int opt;
-    opt = Menu::option();
+    int opt = Menu::option();
+
+    std::vector<Car> results;
     switch (opt) {
     case 1: {
         cout << "Enter car name: ";
         string name = UserInput::inputString();
-        auto results = service.searchCars([&](const Car& c) { return c.getCarName() == name; });
-        for (auto it = results.begin(); it != results.end(); ++it) {
-            it->print();
-        }
+        results = service.searchCars([&](const Car& c) { return c.getCarName() == name; });
         break;
     }
     case 2: {
         cout << "Enter car year: ";
         size_t year = UserInput::inputSize_t();
-        auto results = service.searchCars([&](const Car& c) { return c.getCarYear() == year; });
-        for (auto it = results.begin(); it != results.end(); ++it) {
-            it->print();
-        }
+        results = service.searchCars([&](const Car& c) { return c.getCarYear() == year; });
         break;
     }
     case 3: {
         cout << "Enter car engine volume: ";
         double engineVolume = UserInput::inputDouble();
-        auto results = service.searchCars([&](const Car& c) { return c.getCarEngineVolume() == engineVolume; });
-        for (auto it = results.begin(); it != results.end(); ++it) {
-            it->print();
-        }
+        results = service.searchCars([&](const Car& c) { return c.getCarEngineVolume() == engineVolume; });
         break;
     }
     case 4: {
         cout << "Enter car price: ";
         double price = UserInput::inputDouble();
-        auto results = service.searchCars([&](const Car& c) { return c.getCarPrice() == price; });
-        for (auto it = results.begin(); it != results.end(); ++it) {
-            it->print();
-        }
+        results = service.searchCars([&](const Car& c) { return c.getCarPrice() == price; });
         break;
     }
     default: {
         cout << "Invalid search option.\n";
         return;
     }
+    }
+    printSearchResults(results);
+}
+
+
+
+void UserInterface::printSearchResults(const std::vector<Car>& results) const
+{
+    if (results.empty()) {
+        cout << "No matching cars found.\n";
+    }
+    else {
+        for (auto it = results.begin(); it != results.end(); ++it) {
+
+            it->print(); 
+        }
+
     }
 }
