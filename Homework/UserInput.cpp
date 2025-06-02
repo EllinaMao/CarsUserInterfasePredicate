@@ -4,10 +4,10 @@ using namespace std;
 double UserInput::inputDouble()
 {
     while (true) {
-        string input;
-        getline(cin, input);
+        string userInput; 
+        getline(cin, userInput);
 
-        istringstream iss(input);
+        istringstream iss(userInput);
         double volume;
         char extra;
 
@@ -20,13 +20,13 @@ double UserInput::inputDouble()
     }
 }
 
-int UserInput::inputInt()
+size_t UserInput::inputSize_t()
 {
     while (true) {
-        string input;
-        getline(cin, input);
-        istringstream iss(input);
-        int number;
+        string userInput; 
+        getline(cin, userInput);
+        istringstream iss(userInput);
+        size_t number;
         char extra;
         if (iss >> number && !(iss >> extra) && number > 0) {
             return number;
@@ -34,23 +34,23 @@ int UserInput::inputInt()
         else {
             cerr << "Invalid input. Please enter a positive integer." << endl;
         }
-	}
+    }
 }
-
 
 std::string UserInput::inputString()
 {
     while (true) {
-	string input;
-	getline(std::cin, input);
-	if (!input.empty()) {
-		return input;
-	}
-    else {
-        cerr << "Invalid input. Please enter a non-empty name." << endl;
-    }}
-
+        string userInput; 
+        getline(std::cin, userInput);
+        if (!userInput.empty()) {
+            return userInput;
+        }
+        else {
+            cerr << "Invalid input. Please enter a non-empty name." << endl;
+        }
+    }
 }
+
 
 void UserInput::inputCarDetails()
 {
@@ -58,7 +58,7 @@ void UserInput::inputCarDetails()
     string name = inputString();
 
     std::cout << "Enter year: ";
-    size_t year = inputInt();
+    size_t year = inputSize_t();
 
     cout << "Enter engine volume: ";
     double engine = inputDouble();
