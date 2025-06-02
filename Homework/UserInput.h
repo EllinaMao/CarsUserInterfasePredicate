@@ -1,18 +1,21 @@
 ﻿#pragma once
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <limits>
+#include "CarService.h"
+
 
 class UserInput {
-	public:
+private:
+	CarService& service;
+public:
+	explicit UserInput(CarService& service) : service(service) {}
 
-	static double inputCarEngineVolume();
-	static double inputCarPrice();
-	static std::string inputCarName();
-	static void clearInputBuffer();
+	static double inputDouble();
+	static int inputInt();
+	static std::string inputString();
 
-	std::string mCarName;
-	size_t mCarYear;
-	double mCarEngineVolume;
-	double mCarPrice;
+	void inputCarDetails();
+
 };

@@ -138,6 +138,7 @@
     <ClInclude Include="Car.h" />
     <ClInclude Include="CarRepository.h" />
     <ClInclude Include="CarService.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="SortFunctors.h" />
     <ClInclude Include="UserInput.h" />
     <ClInclude Include="UserInterface.h" />

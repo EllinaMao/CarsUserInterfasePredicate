@@ -4,11 +4,11 @@
 
 class CarRepository {
 private:
-    std::vector<std::unique_ptr<Car>> mCars;
+    std::vector<Car> mCars;
 
 public:
 	CarRepository() = default;
-    void addCar(const Car& car) { mCars.push_back(std::make_unique<Car>(car)); }
+    void addCar(const Car& car) { mCars.push_back(car);}
     void removeCar(size_t index);
 
     void clearCars() { mCars.clear(); }

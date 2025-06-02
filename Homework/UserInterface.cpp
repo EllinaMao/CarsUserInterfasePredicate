@@ -2,44 +2,21 @@
 #include <iostream>
 #include <limits>
 #include "UserInterface.h"
-
 #include "SortFunctors.h"
+#include "Menu.h"
 using namespace std;
 
 
-UserInterface::UserInterface(CarService& service) : service(service) {}
+UserInterface::UserInterface(CarService& service) : service(service), userInput(service) {}
 
 void UserInterface::run() {
     int choice = 0;
     do {
-        cout << "\n=== Car Dealership Menu ===\n";
-        cout << "1. Add car\n";
-        cout << "2. Remove car\n";
-        cout << "3. Show all cars\n";
-        cout << "4. Sort cars\n";
-        cout << "5. Search cars\n";
-        cout << "0. Exit\n";
-        cout << "Select option: ";
-        cin >> choice;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		Menu::displayMainMenu();
 
         switch (choice) {
         case 1: {
-            string name;
-            size_t year;
-            double engine;
-            double price;
-            cout << "Enter car name: ";
-            getline(cin, name);
-            cout << "Enter year: ";
-            cin >> year;
-            cout << "Enter engine volume: ";
-            cin >> engine;
-            cout << "Enter price: ";
-            cin >> price;
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            service.getRepository().addCar(Car(name, year, engine, price));
-            cout << "Car added.\n";
+            userInput.inputCarDetails();
             break;
         }
         case 2: {
